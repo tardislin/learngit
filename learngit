@@ -1,0 +1,86 @@
+git
+sudo apt-git install git
+
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+创建一个版本库非常简单，首先，选择一个合适的地方，创建一个空目录：
+$ mkdir learngit
+$ cd learngit
+$ pwd  #于显示当前目录
+/Home/tardis/learngit 
+
+把该目录变成git key管理的仓库:
+$ git init
+
+test:编写一个readme.txt,将它放到git仓库:
+	查看内容:$ cat readme.txt
+1.告诉git,把文件添加到仓库:(添加到暂存区)
+	$ git add readme.txt
+2.告诉git,把文件提交到仓库:(添加到当前分支)
+	$git commit -m "xxxx"   #-m后面输入本次提交的说明
+
+查看仓库当前状态:
+	$git status
+查看具体修改的内容:
+	$git diff
+	
+版本回退
+查看提交历史:
+$git log	
+$git log --pretty=oneline #条理清晰
+
+如:3628164fb26d48395383f8f31179f24e0882e1e0(commit id) append GPL
+git中,用HEAD表示当前版本,上一版本用HEAD^,上上版本HEAD^^
+HEAD~100
+
+回退到上一版本:
+$git reset --head HEAD^
+
+再回退到最新版本:
+找到该版本的conmmit id: $git reset --head 23546453
+找不到?:$git reflog查看命令历史
+
+
+管理修改:
+查看工作区和版本库里最新版本的区别:
+	$git diff HEAD -- readme.txt
+丢弃工作区的修改:
+	$git checkout -- readme.txt	
+把暂存区的修改撤销掉（unstage），重新放回工作区：
+$git reset HEAD readme.txt
+
+删除文件:
+$rm readme.txt
+1.确定要从版本库中删除文件:git rm ; git commit
+2.删错了:git checkout --readme.test #用版本库的版本替换工作区的版本
+
+远程仓库:
+(github使用)
+1.创建SSH Key:
+	$ssh-keygen -t rsa -C "youremail@example.com"
+	主目录中多了.ssh,里面有id_rsa(私钥)和id_rsa.pub(公钥)
+2.登陆github,settings SSH Keys:
+	add ssh key,title任意,文本框里粘贴id_rsa.pub中内容
+3.在本地和github各创建一个git仓库,让两个仓库远程同步
+create a new repo(名为 learning)
+
+在本地learnig下运行:git remote add origin git@tardislin/learngit.git；(具体完整path)
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；#远程库的名字是origin
+
+把本地库的内容推送到远程库:git push -u origin master #-u将两个库的分支关联,便于以后推送拉取简化命令
+
+从远程库克隆:
+$git clone git@github.com:tardislin/gitskills.git
+Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+
+分支管理:
+1.$git checkout -b dev#-b表示创建并切换
+     = git branch dev
+  	git checkout dev 
+ 2.查看当前分支:git branch
+ 3.合并指定分支到当前分支:
+ 	$git merge dev
+4.删除分支:git branch -d dev 	
+
