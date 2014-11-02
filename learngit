@@ -65,7 +65,7 @@ $rm readme.txt
 3.在本地和github各创建一个git仓库,让两个仓库远程同步
 create a new repo(名为 learning)
 
-在本地learnig下运行:git remote add origin git@tardislin/learngit.git；(具体完整path)
+在本地learnig下运行:git remote add origin git@github.com:tardislin/learngit.git；(具体完整path)
 
 关联后，使用命令git push -u origin master第一次推送master分支的所有内容；#远程库的名字是origin
 
